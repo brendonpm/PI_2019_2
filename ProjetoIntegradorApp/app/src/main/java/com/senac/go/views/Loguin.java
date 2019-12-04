@@ -15,5 +15,7 @@ public class Loguin extends AppCompatActivity {
         setContentView(R.layout.activity_loguin);
 
 
+
+
     }
 }
