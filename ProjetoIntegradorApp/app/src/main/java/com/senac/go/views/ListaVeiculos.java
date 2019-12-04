@@ -1,14 +1,22 @@
 package com.senac.go.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.senac.go.R;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ListaVeiculos extends AppCompatActivity {
 
@@ -28,8 +36,20 @@ public class ListaVeiculos extends AppCompatActivity {
             }
         });
 
+        List<String> placa = new LinkedList<>();
+        List<String> veic = new LinkedList<>();
 
+        placa.add("aaa-1234");
+        placa.add("bbb-2345");
+        placa.add("ccc-3456");
 
+        veic.add("M");
+        veic.add("S");
+        veic.add("M");
+
+        RecyclerView recycler = findViewById(R.id.RecyListVei);
+        recycler.setLayoutManager(new LinearLayoutManager(this));
+        recycler.setAdapter(new VeiculosAdapter(this, veic,placa));
 
     }
 }
