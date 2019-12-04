@@ -20,7 +20,7 @@
         app:srcCompat="@mipmap/gasolina" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/nomeLoguin"
         android:layout_width="235dp"
         android:layout_height="47dp"
         android:layout_marginStart="20dp"
@@ -36,7 +36,7 @@
         android:textColorHint="@color/amarelolatao" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/bEntrar"
         android:layout_width="94dp"
         android:layout_height="47dp"
         android:layout_marginEnd="20dp"
@@ -45,13 +45,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        app:layout_constraintTop_toBottomOf="@+id/senhaLoguin"
         app:layout_constraintVertical_bias="0.928"
         android:background="@color/azullatao"
         android:textColor="@color/amarelolatao"/>
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/senhaLoguin"
         android:layout_width="235dp"
         android:layout_height="47dp"
         android:layout_marginStart="20dp"
@@ -62,7 +62,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        app:layout_constraintTop_toBottomOf="@+id/nomeLoguin"
         android:textColor="@color/colorAccent"
         android:textColorHint="@color/amarelolatao" />
 
