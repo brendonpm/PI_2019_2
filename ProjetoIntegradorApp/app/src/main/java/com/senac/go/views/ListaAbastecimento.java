@@ -17,9 +17,9 @@ public class ListaAbastecimento extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_lista_abastecimento);
 
-        FloatingActionButton bPlusAbas = findViewById(R.id.bPlusAbas);
+        FloatingActionButton bPlusabas = findViewById(R.id.bPlusAbas);
 
-        bPlusAbas.setOnClickListener(new View.OnClickListener() {
+        bPlusabas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(ListaAbastecimento.this, CadastroAbastecimento.class);
