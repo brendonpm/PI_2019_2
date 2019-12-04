@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".views.Relatorios"></activity>
+        <activity
+            android:name=".views.teste"
+            android:label="@string/title_activity_teste"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".views.Relatorios" />
         <activity android:name=".views.CadastroAbastecimento" />
         <activity android:name=".views.ListaAbastecimento" />
         <activity android:name=".views.CadastroVeiculo" />
