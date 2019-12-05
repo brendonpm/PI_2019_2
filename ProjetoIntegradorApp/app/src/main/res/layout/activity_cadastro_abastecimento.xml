@@ -7,6 +7,18 @@
     android:background="@color/corFundo"
     tools:context=".views.CadastroAbastecimento">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@mipmap/gasolina" />
+
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -26,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:ems="10"
         android:hint="Nome do Posto"
         android:inputType="textPersonName"
@@ -96,4 +108,20 @@
         android:textColor="@color/amarelolatao"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="Placa do Veículo"
+        android:textColor="@color/colorAccent"
+        android:textColorHint="@color/amarelolatao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/valor" />
 </androidx.constraintlayout.widget.ConstraintLayout>
