@@ -44,7 +44,7 @@ public class ListaVeiculos extends AppCompatActivity {
         placa.add("ccc-3456");
 
         veic.add("M");
-        veic.add("S");
+        veic.add("C");
         veic.add("M");
 
         RecyclerView recycler = findViewById(R.id.RecyListVei);

@@ -24,12 +24,14 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleAbast"
-        android:layout_width="407dp"
-        android:layout_height="627dp"
+        android:layout_width="358dp"
+        android:layout_height="451dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.941" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/bPlusAbas"
