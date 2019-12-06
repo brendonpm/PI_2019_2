@@ -30,7 +30,7 @@ public class Loguin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_loguin);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.16.1.4:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
 
         UsuarioApi usuarioapi = retrofit.create(UsuarioApi.class);
         usuariorepository = new UsuarioRepository(usuarioapi);
@@ -45,40 +45,34 @@ public class Loguin extends AppCompatActivity {
                 final EditText nomeLoguin = findViewById(R.id.nomeLoguin);
                 final EditText senhaLoguin = findViewById(R.id.senhaLoguin);
 
-                Intent inteMenu = new Intent(Loguin.this, Menu.class);
-                startActivity(inteMenu);
+//                Intent inteMenu = new Intent(Loguin.this, Menu.class);
+//                startActivity(inteMenu);
 
 
-//                usuariorepository.getAll(new IUsuarioRepository.Callback<List<Usuario>>() {
-//
-//                    @Override
-//                    public void onResult(List<Usuario> result) {
-//
-//                        boolean b = false;
-//                        for(int i=0;i<result.size();i++){
-//                            if(result.get(i).getNome().equals(nomeLoguin.getText()) && result.get(i).getSenha().equals(senhaLoguin.getText())){
-//                                b = true;
-//                            }
-//                        }
-//                        if(b){
-//                            Intent inteMenu = new Intent(Loguin.this, Menu.class);
-//                            startActivity(inteMenu);
-//                            b = false;
-//                        }else{
-//                            Toast.makeText(Loguin.this, "Usuario e/ou Senha errados", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onError(Exception e) {
-//                        Toast.makeText(Loguin.this, "Erro: " +e.toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onEmpty() {
-//                        Toast.makeText(Loguin.this, "Vazio", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+                usuariorepository.getUsuarioLoguin(new IUsuarioRepository.Callback<List<Usuario>>() {
+
+                    @Override
+                    public void onResult(List<Usuario> result) {
+                        Toast.makeText(Loguin.this, "entrou", Toast.LENGTH_SHORT).show();
+
+                         if(result.get(0).getNome().equals(nomeLoguin.getText().toString()) && result.get(0).getSenha().equals(senhaLoguin.getText().toString())){
+                             Intent inteMenu = new Intent(Loguin.this, Menu.class);
+                             startActivity(inteMenu);
+                         }else{
+                            Toast.makeText(Loguin.this, "Usuario e/ou Senha errados", Toast.LENGTH_SHORT).show();
+                         }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        Toast.makeText(Loguin.this, "Erro: " +e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onEmpty() {
+                        Toast.makeText(Loguin.this, "Vazio", Toast.LENGTH_SHORT).show();
+                    }
+                },nomeLoguin.getText().toString());
             }
         });
 

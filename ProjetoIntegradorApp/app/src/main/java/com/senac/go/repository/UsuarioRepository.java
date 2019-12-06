@@ -1,7 +1,10 @@
 package com.senac.go.repository;
 
+import android.os.AsyncTask;
+
 import com.senac.go.models.Usuario;
 import com.senac.go.source.UsuarioApi;
+import com.senac.go.task.LoadUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,14 +21,9 @@ public class UsuarioRepository implements IUsuarioRepository {
     }
 
     @Override
-    public void getAll(Callback<List<Usuario>> callback) {
+    public void getUsuarioLoguin(Callback<List<Usuario>> callback,String user) {
 
-        try {
-            ArrayList<Usuario> usuario = new ArrayList<>();
-            String credentials = Credentials.basic("root","toor");
-            usuario.addAll(usuarioApi.getUsuarios(credentials).execute().body());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        AsyncTask<String, Integer, List<Usuario>> asyncTask = new LoadUser(usuarioApi, callback,user);
+        asyncTask.execute();
     }
 }

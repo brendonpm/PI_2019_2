@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IUsuarioRepository {
 
-    void getAll(Callback<List<Usuario>> callback);
+    void getUsuarioLoguin(Callback<List<Usuario>> callback,String usuario);
 
     interface Callback<ResultType> {
 
