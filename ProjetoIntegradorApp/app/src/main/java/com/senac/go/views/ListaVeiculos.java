@@ -18,6 +18,9 @@ import com.senac.go.R;
 import java.util.LinkedList;
 import java.util.List;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ListaVeiculos extends AppCompatActivity {
 
     @Override
@@ -35,6 +38,15 @@ public class ListaVeiculos extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.16.1.4:9898").addConverterFactory(GsonConverterFactory.create()).build();
+
+
+
+
+
+
+
 
         List<String> placa = new LinkedList<>();
         List<String> veic = new LinkedList<>();
