@@ -9,8 +9,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Path;
 
-public interface UserApi {
+public interface Api {
 
+    @Headers({"Authorization: Basic cm9vdDp0b29y"})
     @GET("user/nome/{nome}")
     Call<List<Usuario>> getUser(@Path("nome") String nome);
 
