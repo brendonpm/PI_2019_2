@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoadAllUser extends AsyncTask<String, Integer, List<Usuario>> {
+public class LoadUser extends AsyncTask<String, Integer, List<Usuario>> {
 
     private Api userApi;
     private IUserRepository.Callback<List<Usuario>> callback;
     String nome;
 
-    public LoadAllUser(Api userApi, IUserRepository.Callback<List<Usuario>> callback, String nome) {
+    public LoadUser(Api userApi, IUserRepository.Callback<List<Usuario>> callback, String nome) {
         this.userApi = userApi;
         this.callback = callback;
         this.nome = nome;
@@ -24,7 +24,6 @@ public class LoadAllUser extends AsyncTask<String, Integer, List<Usuario>> {
 
     @Override
     protected List<Usuario> doInBackground(String... strings) {
-
         try {
             ArrayList<Usuario> userList = new ArrayList<>();
             userList.addAll(userApi.getUser(nome).execute().body());

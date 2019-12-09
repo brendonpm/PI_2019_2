@@ -14,7 +14,12 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.senac.go.R;
+import com.senac.go.models.Veiculo;
+import com.senac.go.repository.IVeiculoRepository;
+import com.senac.go.repository.VeiculoRepository;
+import com.senac.go.repository.source.Api;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +28,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ListaVeiculos extends AppCompatActivity {
 
+    public long codusu;
+    public VeiculoRepository veirepository;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +38,10 @@ public class ListaVeiculos extends AppCompatActivity {
         setContentView(R.layout.activity_lista_veiculos);
 
         FloatingActionButton bPlusVeic = findViewById(R.id.bPlusVeic);
+        Intent intent = getIntent();
+        if (intent.hasExtra("usuario")) {
+            this.codusu = intent.getExtras().getLong("usuario");
+        }
 
         bPlusVeic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,29 +51,44 @@ public class ListaVeiculos extends AppCompatActivity {
             }
         });
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://172.16.1.4:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Api veiculoapi = retrofit.create(Api.class);
+        veirepository = new VeiculoRepository(veiculoapi);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ArrayList<Veiculo> str = new ArrayList<>();
+        str.addAll( veirepository.getAll(new IVeiculoRepository.Callback<List<Veiculo>>() {
+            @Override
+            public void onResult(List<Veiculo> result) {
 
+            }
 
+            @Override
+            public void onError(Exception e) {
 
+            }
 
+            @Override
+            public void onEmpty() {
 
-
-
+            }
+        },codusu));
 
         List<String> placa = new LinkedList<>();
-        List<String> veic = new LinkedList<>();
+        List<String> tipo = new LinkedList<>();
 
-        placa.add("aaa-1234");
-        placa.add("bbb-2345");
-        placa.add("ccc-3456");
-
-        veic.add("M");
-        veic.add("C");
-        veic.add("M");
-
+        for(int i=0;i<str.size();i++){
+            placa.add(str.get(i).getPlaca());
+        }
+        for(int i=0;i<str.size();i++){
+            tipo.add(str.get(i).getTipo());
+        }
         RecyclerView recycler = findViewById(R.id.RecyListVei);
         recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setAdapter(new VeiculosAdapter(this, veic,placa));
-
+        recycler.setAdapter(new VeiculosAdapter(this, tipo,placa));
     }
+
+
 }

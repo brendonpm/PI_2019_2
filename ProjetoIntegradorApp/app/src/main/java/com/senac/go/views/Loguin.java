@@ -33,7 +33,7 @@ public class Loguin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_loguin);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.1.4:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
 
         Api usuarioapi = retrofit.create(Api.class);
         usuariorepository = new UserRepository(usuarioapi);
@@ -48,31 +48,37 @@ public class Loguin extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-            ArrayList<Usuario> str = new ArrayList<>();
-            str.addAll(usuariorepository.getUser(new IUserRepository.Callback<List<Usuario>>() {
+                if (nomeLoguin.getText().toString().equals("")) {
+                    Toast.makeText(Loguin.this, "Informe o nome!", Toast.LENGTH_SHORT).show();
+                } else{
+                    ArrayList<Usuario> str = new ArrayList<>();
+                    str.addAll(usuariorepository.getUser(new IUserRepository.Callback<List<Usuario>>() {
 
-                @Override
-                public String onResult(List<Usuario> result) {
-                    return "result";
+                        @Override
+                        public String onResult(List<Usuario> result) {
+                            return "result";
+                        }
+
+                        @Override
+                        public String onError(Exception e) {
+                            return "error";
+                        }
+
+                        @Override
+                        public String onEmpty() {
+                            return "empty";
+                        }
+                    }, nomeLoguin.getText().toString()));
+
+                    if (str.get(0).getSenha().equals(senhaLoguin.getText().toString())) {
+                        long codusu = str.get(0).getCod();
+                        Intent inteMenu = new Intent(Loguin.this, Menu.class);
+                        inteMenu.putExtra("usuario", codusu);
+                        startActivity(inteMenu);
+                    } else {
+                        Toast.makeText(Loguin.this, "Senha errada vacilão!", Toast.LENGTH_SHORT).show();
+                    }
                 }
-
-                @Override
-                public String onError(Exception e) {
-                    return "error";
-                }
-
-                @Override
-                public String onEmpty() {
-                    return "empty";
-                }
-            },nomeLoguin.getText().toString()));
-
-            if(str.get(0).getSenha().equals(senhaLoguin.getText().toString())){
-                Intent inteMenu = new Intent(Loguin.this, Menu.class);
-                startActivity(inteMenu);
-            }else{
-                Toast.makeText(Loguin.this, "Senha errada vacilão!", Toast.LENGTH_SHORT).show();
-            }
             }
         });
     }

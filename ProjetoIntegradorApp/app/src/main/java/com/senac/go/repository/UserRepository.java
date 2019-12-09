@@ -4,7 +4,7 @@ import android.os.AsyncTask;
 
 import com.senac.go.models.Usuario;
 import com.senac.go.repository.source.Api;
-import com.senac.go.repository.task.LoadAllUser;
+import com.senac.go.repository.task.LoadUser;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -19,7 +19,7 @@ public class UserRepository implements IUserRepository {
 
     @Override
     public List<Usuario> getUser(Callback<List<Usuario>> callback, String nome) {
-        AsyncTask<String, Integer, List<Usuario>> asyncTask = new LoadAllUser(userApi, callback,nome);
+        AsyncTask<String, Integer, List<Usuario>> asyncTask = new LoadUser(userApi, callback,nome);
         asyncTask.execute();
 
         try {

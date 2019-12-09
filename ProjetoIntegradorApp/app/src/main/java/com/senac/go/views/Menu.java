@@ -11,6 +11,8 @@ import com.senac.go.R;
 
 public class Menu extends AppCompatActivity {
 
+    public long codusu;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,10 +25,16 @@ public class Menu extends AppCompatActivity {
         Button bCadasAbast = findViewById(R.id.bCadasAbast);
         Button bRelatorios = findViewById(R.id.bRelatorios);
 
+        Intent intent = getIntent();
+        if (intent.hasExtra("usuario")) {
+            this.codusu = intent.getExtras().getLong("usuario");
+        }
+
         bListVeic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLintVei = new Intent(Menu.this, ListaVeiculos.class);
+                intentLintVei.putExtra("usuario", codusu);
                 startActivity(intentLintVei);
             }
         });
@@ -34,6 +42,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentCadasVei = new Intent(Menu.this, CadastroVeiculo.class);
+                intentCadasVei.putExtra("usuario", codusu);
                 startActivity(intentCadasVei);
             }
         });
@@ -41,6 +50,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentListAbas = new Intent(Menu.this, ListaAbastecimento.class);
+                intentListAbas.putExtra("usuario", codusu);
                 startActivity(intentListAbas);
             }
         });
@@ -48,6 +58,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentCadasAbas = new Intent(Menu.this, CadastroAbastecimento.class);
+                intentCadasAbas.putExtra("usuario", codusu);
                 startActivity(intentCadasAbas);
             }
         });
@@ -55,6 +66,7 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intentRela = new Intent(Menu.this, Relatorios.class);
+                intentRela.putExtra("usuario", codusu);
                 startActivity(intentRela);
             }
         });

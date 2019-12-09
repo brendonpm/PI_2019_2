@@ -5,10 +5,10 @@ import java.util.Objects;
 
 public class Veiculo {
 
-    Long cod;
+    long cod;
     String tipo;
     String placa;
-    Long cod_usu;
+    long cod_usu;
 
     public Veiculo() {
     }

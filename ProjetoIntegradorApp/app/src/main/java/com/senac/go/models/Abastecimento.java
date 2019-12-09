@@ -11,8 +11,8 @@ public class Abastecimento {
     String nome_posto;
     long litros;
     long valor_pg;
-    long cod_usu;
-    long cod_vei;
+    long cod_usuario;
+    long cod_veiculo;
 
     public Abastecimento() {
     }
@@ -24,8 +24,8 @@ public class Abastecimento {
         this.nome_posto = nome_posto;
         this.litros = litros;
         this.valor_pg = valor_pg;
-        this.cod_usu = cod_usu;
-        this.cod_vei = cod_vei;
+        this.cod_usuario = cod_usu;
+        this.cod_veiculo = cod_vei;
     }
 
     public long getCod() {
@@ -77,19 +77,19 @@ public class Abastecimento {
     }
 
     public long getCod_usu() {
-        return cod_usu;
+        return cod_usuario;
     }
 
     public void setCod_usu(long cod_usu) {
-        this.cod_usu = cod_usu;
+        this.cod_usuario = cod_usu;
     }
 
     public long getCod_vei() {
-        return cod_vei;
+        return cod_veiculo;
     }
 
     public void setCod_vei(long cod_vei) {
-        this.cod_vei = cod_vei;
+        this.cod_veiculo = cod_vei;
     }
 
     @Override
@@ -101,8 +101,8 @@ public class Abastecimento {
                 ", nome_posto='" + nome_posto + '\'' +
                 ", litros=" + litros +
                 ", valor_pg=" + valor_pg +
-                ", cod_usu=" + cod_usu +
-                ", cod_vei=" + cod_vei +
+                ", cod_usu=" + cod_usuario +
+                ", cod_vei=" + cod_veiculo +
                 '}';
     }
 
@@ -115,14 +115,14 @@ public class Abastecimento {
                 odometro == that.odometro &&
                 litros == that.litros &&
                 valor_pg == that.valor_pg &&
-                cod_usu == that.cod_usu &&
-                cod_vei == that.cod_vei &&
+                cod_usuario == that.cod_usuario &&
+                cod_veiculo == that.cod_veiculo &&
                 Objects.equals(data, that.data) &&
                 Objects.equals(nome_posto, that.nome_posto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cod, data, odometro, nome_posto, litros, valor_pg, cod_usu, cod_vei);
+        return Objects.hash(cod, data, odometro, nome_posto, litros, valor_pg, cod_usuario, cod_veiculo);
     }
 }
