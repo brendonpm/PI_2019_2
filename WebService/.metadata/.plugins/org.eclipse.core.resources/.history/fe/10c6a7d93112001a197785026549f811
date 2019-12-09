@@ -1,0 +1,12 @@
+server.port=${port:9898}
+
+spring.jpa.hibernate.ddl-auto=none
+
+spring.jpa.database=postgresql
+
+spring.jpa.properties..hibernate.dialet= org.hibernate.dialect.PostgreSQLDialect
+spring.datasource.url=jdbc:postgresql://localhost:5432/PROVAN2?useSSL=false
+spring.datasource.username=postgres
+spring.datasource.password=aluno
+
+spring.jpa.show-sql=true
