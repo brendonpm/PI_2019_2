@@ -1,9 +1,15 @@
 package com.senac.go.models;
 
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import java.util.Objects;
 
+@Entity
 public class Usuario {
 
+    @PrimaryKey
     long cod;
     String nome;
     String senha;
@@ -11,6 +17,7 @@ public class Usuario {
     public Usuario() {
     }
 
+    @Ignore
     public Usuario(long cod, String nome, String senha) {
         this.cod = cod;
         this.nome = nome;
