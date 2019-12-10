@@ -81,14 +81,14 @@ public class CadastroAbastecimento extends AppCompatActivity {
                 for(int i=0;i<str.size();i++){
                     if(str.get(i).getPlaca().equals(placa.getText().toString())){
                         cod_veiculo = str.get(i).getCod();
-                        //Toast.makeText(CadastroAbastecimento.this, String.valueOf(cod_veiculo), Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 Abastecimento abas = new Abastecimento();
 
                 Date data = new Date();
-                //abas.setData(data);
+
+                abas.setData(data);
                 abas.setOdometro(Long.valueOf(odo.getText().toString()));
                 abas.setNome_posto(nome_posto.getText().toString());
                 abas.setLitros(Long.valueOf(litros.getText().toString()));
