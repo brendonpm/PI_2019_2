@@ -8,7 +8,7 @@ public interface IVeiculoRepository {
 
     List<Veiculo> getAll(Callback<List<Veiculo>> callback,long cod);
 
-    void crie(Veiculo model, Callback<Veiculo> callback);
+    void crie(Callback<Veiculo> callback, Veiculo model);
 
     interface Callback<ResultType> {
 

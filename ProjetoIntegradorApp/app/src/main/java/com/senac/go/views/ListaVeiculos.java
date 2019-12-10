@@ -51,7 +51,7 @@ public class ListaVeiculos extends AppCompatActivity {
             }
         });
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api veiculoapi = retrofit.create(Api.class);
         veirepository = new VeiculoRepository(veiculoapi);
     }

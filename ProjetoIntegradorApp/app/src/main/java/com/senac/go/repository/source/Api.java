@@ -24,7 +24,11 @@ public interface Api {
     Call<List<Veiculo>> getVeiculos(@Path("cod") long cod);
 
     @Headers({"Authorization: Basic cm9vdDp0b29y"})
-    @POST("Veiculo")
+    @GET("veiculo/placa/{placa}")
+    Call<List<Veiculo>> getVeiculosPlaca(@Path("placa") String placa);
+
+    @Headers({"Authorization: Basic cm9vdDp0b29y"})
+    @POST("veiculo")
     Call<Veiculo> setVeiculo(@Body Veiculo veiculo);
 
     @Headers({"Authorization: Basic cm9vdDp0b29y"})

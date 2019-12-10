@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import com.senac.go.R;
 import com.senac.go.models.Veiculo;
@@ -34,7 +35,7 @@ public class CadastroVeiculo extends AppCompatActivity {
             this.codusu = intent.getExtras().getLong("usuario");
         }
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api veiculoapi = retrofit.create(Api.class);
         veirepository = new VeiculoRepository(veiculoapi);
 
@@ -54,24 +55,30 @@ public class CadastroVeiculo extends AppCompatActivity {
                 }else{
                     tipo = "C";
                 }
-                Veiculo vei = new Veiculo((long) 1,tipo,textPlaca.getText().toString(),codusu);
+                final Veiculo vei = new Veiculo();
+                vei.setTipo(tipo);
+                vei.setPlaca(textPlaca.getText().toString());
+                vei.setCod_usu(codusu);
 
-                veirepository.crie(vei, new IVeiculoRepository.Callback<Veiculo>() {
+
+                veirepository.crie(new IVeiculoRepository.Callback<Veiculo>() {
                     @Override
                     public void onResult(Veiculo result) {
-
+                        Toast.makeText(CadastroVeiculo.this, "Salvo", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onError(Exception e) {
-
+                        Toast.makeText(CadastroVeiculo.this, "Erro", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onEmpty() {
-
+                        Toast.makeText(CadastroVeiculo.this, "Vazio", Toast.LENGTH_SHORT).show();
                     }
-                });
+                },vei);
+
+
             }
         });
     }

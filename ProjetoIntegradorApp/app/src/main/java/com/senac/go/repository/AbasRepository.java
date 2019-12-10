@@ -9,6 +9,9 @@ import com.senac.go.repository.task.LoadAbas;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import retrofit2.Call;
+import retrofit2.Response;
+
 public class AbasRepository implements IAbasRepository {
 
     private Api veiApi;
@@ -32,7 +35,19 @@ public class AbasRepository implements IAbasRepository {
     }
 
     @Override
-    public void crie(Abastecimento model, Callback<Abastecimento> callback) {
+    public void crie(Abastecimento model, final Callback<Abastecimento> callback) {
+        veiApi.setAbast(model).enqueue(new retrofit2.Callback<Abastecimento>() {
+            @Override
+            public void onResponse(Call<Abastecimento> call, Response<Abastecimento> response) {
+                callback.onResult(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<Abastecimento> call, Throwable t) {
+
+            }
+        });
+
 
     }
 }

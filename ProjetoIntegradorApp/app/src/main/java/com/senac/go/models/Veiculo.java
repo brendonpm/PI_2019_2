@@ -8,7 +8,7 @@ public class Veiculo {
     long cod;
     String tipo;
     String placa;
-    long cod_usu;
+    long cod_usuario;
 
     public Veiculo() {
     }
@@ -17,7 +17,7 @@ public class Veiculo {
         this.cod = cod;
         this.tipo = tipo;
         this.placa = placa;
-        this.cod_usu = cod_usu;
+        this.cod_usuario = cod_usu;
     }
 
     public Long getCod() {
@@ -45,11 +45,11 @@ public class Veiculo {
     }
 
     public Long getCod_usu() {
-        return cod_usu;
+        return cod_usuario;
     }
 
     public void setCod_usu(Long cod_usu) {
-        this.cod_usu = cod_usu;
+        this.cod_usuario = cod_usu;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class Veiculo {
                 "cod=" + cod +
                 ", tipo='" + tipo + '\'' +
                 ", placa='" + placa + '\'' +
-                ", cod_usu=" + cod_usu +
+                ", cod_usu=" + cod_usuario +
                 '}';
     }
 
@@ -70,11 +70,11 @@ public class Veiculo {
         return Objects.equals(cod, veiculo.cod) &&
                 Objects.equals(tipo, veiculo.tipo) &&
                 Objects.equals(placa, veiculo.placa) &&
-                Objects.equals(cod_usu, veiculo.cod_usu);
+                Objects.equals(cod_usuario, veiculo.cod_usuario);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cod, tipo, placa, cod_usu);
+        return Objects.hash(cod, tipo, placa, cod_usuario);
     }
 }
