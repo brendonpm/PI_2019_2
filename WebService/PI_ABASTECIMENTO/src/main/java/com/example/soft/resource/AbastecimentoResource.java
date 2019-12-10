@@ -1,0 +1,76 @@
+package com.example.soft.resource;
+
+import java.net.URI;
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.example.soft.model.Abastecimento;
+import com.example.soft.repository.AbastecimentoRepository;
+
+@RestController
+@RequestMapping("/abastecimento")
+public class AbastecimentoResource {
+	
+	@Autowired
+	private AbastecimentoRepository abasRepo;
+	
+	@GetMapping
+	public List<Abastecimento> list(){
+		return abasRepo.findAll();				
+	}
+	
+	@GetMapping("/usuario/{cod}")
+	public List<Abastecimento> senha(@PathVariable Long cod){	
+		return abasRepo.findByCodUsu(cod);
+	}
+	
+	@GetMapping("/{cod}")
+	public Optional<Abastecimento> findById(@PathVariable Long cod) {
+		return abasRepo.findById(cod);
+	}
+	
+	@PostMapping
+	public ResponseEntity<Abastecimento> create(@RequestBody Abastecimento abastecimento,HttpServletResponse response){
+		
+		Abastecimento save = abasRepo.save(abastecimento);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{cod}")
+				.buildAndExpand(save.getCod()).toUri();
+		
+		return ResponseEntity.created(uri).body(save);
+	}
+	
+	@DeleteMapping("/{cod}")
+	@ResponseStatus
+	public void delete(@PathVariable Long cod) {
+		abasRepo.deleteById(cod);		
+	}
+	
+	@PutMapping("/{cod}")
+	public ResponseEntity<Abastecimento> update(@PathVariable Long cod,@RequestBody Abastecimento abastecimento){
+		Optional<Abastecimento> userBanco = abasRepo.findById(cod);
+		BeanUtils.copyProperties(abastecimento, userBanco.get(),"cod");
+		abasRepo.save(userBanco.get());
+		return ResponseEntity.ok(abastecimento);
+	}
+	
+	
+	
+	
+	
+}
