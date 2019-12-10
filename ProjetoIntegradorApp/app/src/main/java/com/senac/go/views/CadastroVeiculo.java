@@ -35,25 +35,28 @@ public class CadastroVeiculo extends AppCompatActivity {
             this.codusu = intent.getExtras().getLong("usuario");
         }
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api veiculoapi = retrofit.create(Api.class);
         veirepository = new VeiculoRepository(veiculoapi);
 
         final RadioButton rMoto = findViewById(R.id.radiomoto);
-        RadioButton rCarro = findViewById(R.id.radiocarro);
+        final RadioButton rCarro = findViewById(R.id.radiocarro);
         Button bCadastrar = findViewById(R.id.bCadastrar);
         final EditText textPlaca = findViewById(R.id.TextPlaca);
 
-        rCarro.setSelected(true);
+        rCarro.setChecked(true);
 
         bCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String tipo;
-                if(rMoto.isSelected()){
+                String tipo = "";
+                if(rMoto.isChecked()){
                     tipo = "M";
-                }else{
+                    Toast.makeText(CadastroVeiculo.this, "moto", Toast.LENGTH_SHORT).show();
+                }
+                if(rCarro.isChecked()){
                     tipo = "C";
+                    Toast.makeText(CadastroVeiculo.this, "carro", Toast.LENGTH_SHORT).show();
                 }
                 final Veiculo vei = new Veiculo();
                 vei.setTipo(tipo);

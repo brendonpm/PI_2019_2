@@ -32,7 +32,7 @@ public interface Api {
     Call<List<Abastecimento>> getAbast(@Path("cod") long cod);
 
     @Headers({"Authorization: Basic cm9vdDp0b29y"})
-    @POST("Abastecimento")
+    @POST("abastecimento")
     Call<Abastecimento> setAbast(@Body Abastecimento abast);
 
 

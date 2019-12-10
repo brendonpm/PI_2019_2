@@ -18,6 +18,7 @@ import com.senac.go.repository.IVeiculoRepository;
 import com.senac.go.repository.VeiculoRepository;
 import com.senac.go.repository.source.Api;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +43,7 @@ public class CadastroAbastecimento extends AppCompatActivity {
             this.codusu = intent.getExtras().getLong("usuario");
         }
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api abasapi = retrofit.create(Api.class);
         abasrepository = new AbasRepository(abasapi);
         veirepository = new VeiculoRepository(abasapi);
@@ -65,12 +66,10 @@ public class CadastroAbastecimento extends AppCompatActivity {
                     public void onResult(List<Veiculo> result) {
 
                     }
-
                     @Override
                     public void onError(Exception e) {
 
                     }
-
                     @Override
                     public void onEmpty() {
 
@@ -86,28 +85,29 @@ public class CadastroAbastecimento extends AppCompatActivity {
 
                 Abastecimento abas = new Abastecimento();
 
+                SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
+
                 Date data = new Date();
 
-                abas.setData(data);
+                abas.setData(formato.format(data));
                 abas.setOdometro(Long.valueOf(odo.getText().toString()));
                 abas.setNome_posto(nome_posto.getText().toString());
                 abas.setLitros(Long.valueOf(litros.getText().toString()));
                 abas.setValor_pg(Long.valueOf(valor_pg.getText().toString()));
                 abas.setCod_usu(codusu);
+                Toast.makeText(CadastroAbastecimento.this, "usu: "+ codusu, Toast.LENGTH_SHORT).show();
                 abas.setCod_vei(cod_veiculo);
+                Toast.makeText(CadastroAbastecimento.this, "vei: "+ cod_veiculo, Toast.LENGTH_SHORT).show();
 
                 abasrepository.crie(abas,new IAbasRepository.Callback<Abastecimento>() {
-
                     @Override
                     public void onResult(Abastecimento result) {
                         Toast.makeText(CadastroAbastecimento.this, "Salvo", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onError(Exception e) {
                         Toast.makeText(CadastroAbastecimento.this, "Erro", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onEmpty() {
                         Toast.makeText(CadastroAbastecimento.this, "Vazio", Toast.LENGTH_SHORT).show();

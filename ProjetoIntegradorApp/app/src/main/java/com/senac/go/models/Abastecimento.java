@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Abastecimento {
 
     long cod;
-    Date data;
+    String data;
     long odometro;
     String nome_posto;
     long litros;
@@ -17,7 +17,7 @@ public class Abastecimento {
     public Abastecimento() {
     }
 
-    public Abastecimento(long cod, Date data, long odometro, String nome_posto, long litros, long valor_pg, long cod_usu, long cod_vei) {
+    public Abastecimento(long cod, String data, long odometro, String nome_posto, long litros, long valor_pg, long cod_usu, long cod_vei) {
         this.cod = cod;
         this.data = data;
         this.odometro = odometro;
@@ -36,11 +36,11 @@ public class Abastecimento {
         this.cod = cod;
     }
 
-    public Date getData() {
+    public String getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(String data) {
         this.data = data;
     }
 

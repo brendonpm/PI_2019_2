@@ -19,6 +19,7 @@ import com.senac.go.repository.IVeiculoRepository;
 import com.senac.go.repository.VeiculoRepository;
 import com.senac.go.repository.source.Api;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -50,11 +51,12 @@ public class ListaAbastecimento extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent(ListaAbastecimento.this, CadastroAbastecimento.class);
+                intent.putExtra("usuario", codusu);
                 startActivity(intent);
             }
         });
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api abasapi = retrofit.create(Api.class);
 
         abasRepository = new AbasRepository(abasapi);
@@ -83,7 +85,7 @@ public class ListaAbastecimento extends AppCompatActivity {
         List<String> posto = new LinkedList<>();
         List<String> litros = new LinkedList<>();
         List<String> valor = new LinkedList<>();
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
 
         ArrayList<Veiculo> strvei = new ArrayList<>();
         strvei.addAll( veirepository.getAll(new IVeiculoRepository.Callback<List<Veiculo>>() {
@@ -108,9 +110,14 @@ public class ListaAbastecimento extends AppCompatActivity {
                 }
             }
         }
-
+        Date datag;
         for(int i=0;i<str.size();i++){
-            data.add(formato.format(str.get(i).getData()));
+            try {
+                datag = formato.parse(str.get(i).getData());
+                data.add(formato.format(datag));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         for(int i=0;i<str.size();i++){
             odometro.add(String.valueOf(str.get(i).getOdometro()));
