@@ -126,7 +126,6 @@ public class Relatorios extends AppCompatActivity {
                 long litros;
                 km = (abastTemp.get(abastTemp.size()-1).getOdometro()) - (abastTemp.get(abastTemp.size()-2).getOdometro());
                 litros = abastTemp.get(abastTemp.size()-1).getLitros();
-
                 media.add(String.valueOf(km/litros)); //============================================ media
             }else{
                 media.add("Faça mais um abastecimento!"); //======================================== media
@@ -135,7 +134,5 @@ public class Relatorios extends AppCompatActivity {
         RecyclerView recycler = findViewById(R.id.recycleRelat);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(new RelatoriosAdapter(this, veic,placa,postcaro,postbarato,media));
-
-
     }
 }
