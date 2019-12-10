@@ -35,7 +35,6 @@ public class AbastecimentosAdapter extends RecyclerView.Adapter<AbastecimentosAd
         this.valor = valor;
         this.placa = placa;
         this.veic = veic;
-
     }
 
     @NonNull

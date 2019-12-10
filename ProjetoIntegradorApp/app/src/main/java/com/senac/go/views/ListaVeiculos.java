@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.senac.go.R;
@@ -63,17 +64,15 @@ public class ListaVeiculos extends AppCompatActivity {
         str.addAll( veirepository.getAll(new IVeiculoRepository.Callback<List<Veiculo>>() {
             @Override
             public void onResult(List<Veiculo> result) {
-
+                Toast.makeText(ListaVeiculos.this, "Carregado", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onError(Exception e) {
-
+                Toast.makeText(ListaVeiculos.this, "Erro", Toast.LENGTH_SHORT).show();
             }
-
             @Override
             public void onEmpty() {
-
+                Toast.makeText(ListaVeiculos.this, "Vazio", Toast.LENGTH_SHORT).show();
             }
         },codusu));
 

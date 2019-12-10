@@ -69,12 +69,15 @@ public class ListaAbastecimento extends AppCompatActivity {
         str.addAll( abasRepository.getAll(new IAbasRepository.Callback<List<Abastecimento>>() {
             @Override
             public void onResult(List<Abastecimento> result) {
+                Toast.makeText(ListaAbastecimento.this, "Abastecimentos Carregados", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onError(Exception e) {
+                Toast.makeText(ListaAbastecimento.this, "Erro", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onEmpty() {
+                Toast.makeText(ListaAbastecimento.this, "Vazio", Toast.LENGTH_SHORT).show();
             }
         },codusu));
 
@@ -91,12 +94,15 @@ public class ListaAbastecimento extends AppCompatActivity {
         strvei.addAll( veirepository.getAll(new IVeiculoRepository.Callback<List<Veiculo>>() {
             @Override
             public void onResult(List<Veiculo> result) {
+                Toast.makeText(ListaAbastecimento.this, "Veiculos Carregados", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onError(Exception e) {
+                Toast.makeText(ListaAbastecimento.this, "Salvo", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onEmpty() {
+                Toast.makeText(ListaAbastecimento.this, "Salvo", Toast.LENGTH_SHORT).show();
             }
         },codusu));
 

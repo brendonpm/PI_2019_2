@@ -64,15 +64,15 @@ public class CadastroAbastecimento extends AppCompatActivity {
                 str.addAll( veirepository.getAll(new IVeiculoRepository.Callback<List<Veiculo>>() {
                     @Override
                     public void onResult(List<Veiculo> result) {
-
+                        Toast.makeText(CadastroAbastecimento.this, "Carregado", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onError(Exception e) {
-
+                        Toast.makeText(CadastroAbastecimento.this, "Erro", Toast.LENGTH_SHORT).show();
                     }
                     @Override
                     public void onEmpty() {
-
+                        Toast.makeText(CadastroAbastecimento.this, "Vazio", Toast.LENGTH_SHORT).show();
                     }
                 },codusu));
                 long cod_veiculo = 0;

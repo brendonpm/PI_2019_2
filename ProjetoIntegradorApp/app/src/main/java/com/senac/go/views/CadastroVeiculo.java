@@ -52,29 +52,24 @@ public class CadastroVeiculo extends AppCompatActivity {
                 String tipo = "";
                 if(rMoto.isChecked()){
                     tipo = "M";
-                    Toast.makeText(CadastroVeiculo.this, "moto", Toast.LENGTH_SHORT).show();
                 }
                 if(rCarro.isChecked()){
                     tipo = "C";
-                    Toast.makeText(CadastroVeiculo.this, "carro", Toast.LENGTH_SHORT).show();
                 }
                 final Veiculo vei = new Veiculo();
                 vei.setTipo(tipo);
                 vei.setPlaca(textPlaca.getText().toString());
                 vei.setCod_usu(codusu);
 
-
                 veirepository.crie(new IVeiculoRepository.Callback<Veiculo>() {
                     @Override
                     public void onResult(Veiculo result) {
                         Toast.makeText(CadastroVeiculo.this, "Salvo", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onError(Exception e) {
                         Toast.makeText(CadastroVeiculo.this, "Erro", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onEmpty() {
                         Toast.makeText(CadastroVeiculo.this, "Vazio", Toast.LENGTH_SHORT).show();

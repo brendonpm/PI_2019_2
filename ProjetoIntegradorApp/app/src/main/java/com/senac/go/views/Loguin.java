@@ -56,16 +56,19 @@ public class Loguin extends AppCompatActivity {
 
                         @Override
                         public String onResult(List<Usuario> result) {
+                            Toast.makeText(Loguin.this, "Salvo", Toast.LENGTH_SHORT).show();
                             return "result";
                         }
 
                         @Override
                         public String onError(Exception e) {
+                            Toast.makeText(Loguin.this, "Erro", Toast.LENGTH_SHORT).show();
                             return "error";
                         }
 
                         @Override
                         public String onEmpty() {
+                            Toast.makeText(Loguin.this, "Vazio", Toast.LENGTH_SHORT).show();
                             return "empty";
                         }
                     }, nomeLoguin.getText().toString()));
