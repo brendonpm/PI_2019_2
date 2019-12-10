@@ -33,7 +33,7 @@ public class Loguin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_loguin);
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
 
         Api usuarioapi = retrofit.create(Api.class);
         usuariorepository = new UserRepository(usuarioapi);
