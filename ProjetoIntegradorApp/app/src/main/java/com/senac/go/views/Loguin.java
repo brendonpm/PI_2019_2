@@ -35,15 +35,17 @@ public class Loguin extends AppCompatActivity {
         getSupportActionBar().hide();
         setContentView(R.layout.activity_loguin);
 
+        Button bEntrar = findViewById(R.id.bEntrar);
+
         istatus = new InternetStatus();
         if(istatus.isNetworkAvailable(this.getApplicationContext())){
             Toast.makeText(this, "Você está conectado!", Toast.LENGTH_SHORT).show();
         }else{
+            bEntrar.setEnabled(false);
             Toast.makeText(this, "Você não está conectado!", Toast.LENGTH_SHORT).show();
         }
 
-
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
 
         Api usuarioapi = retrofit.create(Api.class);
         usuariorepository = new UserRepository(usuarioapi);
@@ -52,7 +54,7 @@ public class Loguin extends AppCompatActivity {
         final EditText senhaLoguin = findViewById(R.id.senhaLoguin);
 
 
-        Button bEntrar = findViewById(R.id.bEntrar);
+
 
         bEntrar.setOnClickListener(new View.OnClickListener() {
             @Override

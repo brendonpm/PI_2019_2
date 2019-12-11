@@ -81,10 +81,6 @@ public class AbastecimentosAdapter extends RecyclerView.Adapter<AbastecimentosAd
                 ImageView iv = itemView.findViewById(R.id.imageveicabast);
                 iv.setImageResource(R.mipmap.carro);
             }
-
-
-
-
         }
     }
 

@@ -56,7 +56,7 @@ public class ListaAbastecimento extends AppCompatActivity {
             }
         });
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api abasapi = retrofit.create(Api.class);
 
         abasRepository = new AbasRepository(abasapi);
