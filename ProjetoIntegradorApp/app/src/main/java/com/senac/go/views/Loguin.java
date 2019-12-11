@@ -1,6 +1,7 @@
 package com.senac.go.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +15,8 @@ import com.senac.go.models.Usuario;
 import com.senac.go.repository.IUserRepository;
 import com.senac.go.repository.UserRepository;
 import com.senac.go.repository.source.Api;
+import com.senac.go.repository.source.dao.AbstractDatabase;
+import com.senac.go.repository.source.dao.UserDaoSource;
 import com.senac.go.repository.status.InternetStatus;
 
 
@@ -45,16 +48,17 @@ public class Loguin extends AppCompatActivity {
             Toast.makeText(this, "Você não está conectado!", Toast.LENGTH_SHORT).show();
         }
 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.165:9898").addConverterFactory(GsonConverterFactory.create()).build();
-
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
         Api usuarioapi = retrofit.create(Api.class);
-        usuariorepository = new UserRepository(usuarioapi);
+        UserDaoSource userDao = Room.databaseBuilder(getApplicationContext(), AbstractDatabase.class, "abas_bd")
+                .fallbackToDestructiveMigration()
+                .build()
+                .createDaoSource();
+
+        usuariorepository = new UserRepository(usuarioapi,userDao,this.getApplicationContext());
 
         final EditText nomeLoguin = findViewById(R.id.nomeLoguin);
         final EditText senhaLoguin = findViewById(R.id.senhaLoguin);
-
-
-
 
         bEntrar.setOnClickListener(new View.OnClickListener() {
             @Override
