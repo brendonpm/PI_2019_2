@@ -14,6 +14,7 @@ import com.senac.go.models.Usuario;
 import com.senac.go.repository.IUserRepository;
 import com.senac.go.repository.UserRepository;
 import com.senac.go.repository.source.Api;
+import com.senac.go.repository.status.InternetStatus;
 
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Loguin extends AppCompatActivity {
 
     public UserRepository usuariorepository;
+    public InternetStatus istatus;
 
 
     @Override
@@ -32,6 +34,14 @@ public class Loguin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_loguin);
+
+        istatus = new InternetStatus();
+        if(istatus.isNetworkAvailable(this.getApplicationContext())){
+            Toast.makeText(this, "Você está conectado!", Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, "Você não está conectado!", Toast.LENGTH_SHORT).show();
+        }
+
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.31.14:9898").addConverterFactory(GsonConverterFactory.create()).build();
 

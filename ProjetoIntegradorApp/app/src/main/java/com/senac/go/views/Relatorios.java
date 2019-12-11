@@ -85,54 +85,60 @@ public class Relatorios extends AppCompatActivity {
 
         //------------------------------------------------------------------------------------------
 
-        List<String> placa = new LinkedList<>();
-        List<String> veic = new LinkedList<>();
-        List<String> postcaro = new LinkedList<>();
-        List<String> postbarato = new LinkedList<>();
-        List<String> media = new LinkedList<>();
+        if(abast.size() > 0){
+            List<String> placa = new LinkedList<>();
+            List<String> veic = new LinkedList<>();
+            List<String> postcaro = new LinkedList<>();
+            List<String> postbarato = new LinkedList<>();
+            List<String> media = new LinkedList<>();
 
-        for(int i=0; i<veiculos.size();i++){
-            ArrayList<Abastecimento> abastTemp = new ArrayList<>();
-            for(int j=0; j<abast.size();j++){
-                if(veiculos.get(i).getCod().equals(abast.get(j).getCod_vei())){
-                    abastTemp.add(abast.get(j));
+            for(int i=0; i<veiculos.size();i++){
+                ArrayList<Abastecimento> abastTemp = new ArrayList<>();
+                for(int j=0; j<abast.size();j++){
+                    if(veiculos.get(i).getCod().equals(abast.get(j).getCod_vei())){
+                        abastTemp.add(abast.get(j));
+                    }
+                }
+                placa.add(veiculos.get(i).getPlaca()); //=============================================== placa
+                veic.add(veiculos.get(i).getTipo()); //================================================= tipo
+
+                long menor_vlr = 10000;
+                String menor = "";
+                for(int j=0; j<abastTemp.size();j++){
+                    if((abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros()) < menor_vlr){
+                        menor_vlr = abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros();
+                        menor = abastTemp.get(j).getNome_posto()+" R$"+menor_vlr+" p/L";
+                    }
+                }
+                postbarato.add(menor); //=============================================================== posto barato
+
+                long maior_vlr = 0;
+                String maior = "";
+                for(int j=0; j<abastTemp.size();j++){
+                    if((abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros()) >= maior_vlr){
+                        maior_vlr = abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros();
+                        maior = abastTemp.get(j).getNome_posto() +" R$"+maior_vlr+" p/L";
+                    }
+                }
+                postcaro.add(maior); //================================================================= posto caro
+
+                if(abastTemp.size()>1){
+                    long km;
+                    long litros;
+                    km = (abastTemp.get(abastTemp.size()-1).getOdometro()) - (abastTemp.get(abastTemp.size()-2).getOdometro());
+                    litros = abastTemp.get(abastTemp.size()-1).getLitros();
+                    media.add(String.valueOf(km/litros)); //============================================ media
+                }else{
+                    media.add("Faça mais um abastecimento!"); //======================================== media
                 }
             }
-            placa.add(veiculos.get(i).getPlaca()); //=============================================== placa
-            veic.add(veiculos.get(i).getTipo()); //================================================= tipo
-
-            long menor_vlr = 10000;
-            String menor = "";
-            for(int j=0; j<abastTemp.size();j++){
-                if((abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros()) < menor_vlr){
-                    menor_vlr = abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros();
-                    menor = abastTemp.get(j).getNome_posto()+" R$"+menor_vlr+" p/L";
-                }
-            }
-            postbarato.add(menor); //=============================================================== posto barato
-
-            long maior_vlr = 0;
-            String maior = "";
-            for(int j=0; j<abastTemp.size();j++){
-                if((abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros()) >= maior_vlr){
-                    maior_vlr = abastTemp.get(j).getValor_pg()/abastTemp.get(j).getLitros();
-                    maior = abastTemp.get(j).getNome_posto() +" R$"+maior_vlr+" p/L";
-                }
-            }
-            postcaro.add(maior); //================================================================= posto caro
-
-            if(abastTemp.size()>1){
-                long km;
-                long litros;
-                km = (abastTemp.get(abastTemp.size()-1).getOdometro()) - (abastTemp.get(abastTemp.size()-2).getOdometro());
-                litros = abastTemp.get(abastTemp.size()-1).getLitros();
-                media.add(String.valueOf(km/litros)); //============================================ media
-            }else{
-                media.add("Faça mais um abastecimento!"); //======================================== media
-            }
+            RecyclerView recycler = findViewById(R.id.recycleRelat);
+            recycler.setLayoutManager(new LinearLayoutManager(this));
+            recycler.setAdapter(new RelatoriosAdapter(this, veic,placa,postcaro,postbarato,media));
+        }else{
+            Toast.makeText(this, "Você não possui abastecimentos cadastrados", Toast.LENGTH_SHORT).show();
         }
-        RecyclerView recycler = findViewById(R.id.recycleRelat);
-        recycler.setLayoutManager(new LinearLayoutManager(this));
-        recycler.setAdapter(new RelatoriosAdapter(this, veic,placa,postcaro,postbarato,media));
+
+
     }
 }
