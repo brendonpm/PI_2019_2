@@ -8,7 +8,6 @@ import com.senac.go.repository.source.Api;
 import com.senac.go.repository.source.dao.UserDaoSource;
 import com.senac.go.repository.status.InternetStatus;
 import com.senac.go.repository.task.LoadUser;
-import com.senac.go.repository.task.SaveUser;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -33,12 +32,10 @@ public class UserRepository implements IUserRepository {
         iStatus = new InternetStatus();
 
         if(iStatus.isNetworkAvailable(ctx)) {
-            AsyncTask<String, Integer, List<Usuario>> asyncTask = new LoadUser(userApi, callback, nome);
+            AsyncTask<String, Integer, List<Usuario>> asyncTask = new LoadUser(userApi, callback, nome,daoSource);
             asyncTask.execute();
 
             try {
-//                AsyncTask<String, Integer, List<Usuario>> asyncTaskSave = new SaveUser(daoSource,callback,asyncTask.get().get(0));
-//                asyncTaskSave.execute();
                 return asyncTask.get();
             } catch (ExecutionException e) {
                 e.printStackTrace();
@@ -48,7 +45,7 @@ public class UserRepository implements IUserRepository {
             return null;
         }else{
 
-            return null;
         }
+        return null;
     }
 }

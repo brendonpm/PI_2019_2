@@ -1,0 +1,57 @@
+pipeline{
+    agent any
+    environment {
+        diretorio = "$WORKSPACE/ProjetoIntegradorApp"
+    }
+    stages {
+        stage('Preparando workpace') {
+            steps {
+                echo 'Preparando workpace'
+                dir("$diretorio") {
+                    sh 'gradle  wrapper'
+                }
+            }
+        }
+        stage('testes de unidade') {
+            steps {
+                echo 'testes de unidade'
+                dir("$diretorio") {
+                    sh 'cd $WORKSPACE/ProjetoIntegradorApp/'
+                    sh './gradlew test'
+                }
+            }
+        }
+        stage('build do apk') {
+            steps {
+                echo 'build do apk'
+                dir("$diretorio") {
+                    sh 'cd $WORKSPACE/ProjetoIntegradorApp/'
+                    sh './gradlew assembleRelease'
+                }
+            }
+        }
+        stage('arquivar apk') {
+            steps {
+                echo 'arquivar apk'
+                archiveArtifacts artifacts: '**/app-release-unsigned.apk', fingerprint:true , allowEmptyArchive:false
+                echo 'apk arquivado'
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+}
